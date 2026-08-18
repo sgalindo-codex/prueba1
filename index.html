@@ -2,11 +2,43 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=pwa/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LEDUNI Controller</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+  <meta name="description" content="Inventario de comida y lista de la compra de CASA J">
+  <meta name="theme-color" content="#0B0B0D">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="CASA J">
+
+  <title>CASA J — Inventario de casa</title>
+
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilos.css">
 </head>
-<body>
-  <script>window.location.replace("pwa/");</script>
+<body class="cargando">
+
+  <header class="topbar">
+    <div class="topbar__marca">
+      <span class="topbar__logo">J</span>
+      <div class="topbar__textos">
+        <span class="topbar__casa">CASA J</span>
+        <h1 class="topbar__titulo" id="titulo">Inventario</h1>
+      </div>
+    </div>
+  </header>
+
+  <main class="vista" id="vista"></main>
+
+  <nav class="tabbar" id="tabbar" aria-label="Secciones"></nav>
+
+  <div id="toast-host" class="toast-host" aria-live="polite"></div>
+
+  <div class="splash" aria-hidden="true">
+    <span class="splash__logo">J</span>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
 </body>
 </html>
