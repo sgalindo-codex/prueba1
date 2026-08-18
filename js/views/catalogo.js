@@ -87,7 +87,8 @@ export default {
           <span class="fila__cuerpo">
             <span class="fila__titulo">${esc(p.nombre)}</span>
             <span class="fila__sub">
-              ${cantidad(p.stock)} ${esc(p.unidad)} · mín. ${cantidad(p.stockMinimo)} ·
+              ${p.marca ? `${esc(p.marca)} · ` : ''}${cantidad(p.stock)} ${esc(p.unidad)} ·
+              mín. ${cantidad(p.stockMinimo)} ·
               ${precios.length ? `${precios.length} ${precios.length === 1 ? 'precio' : 'precios'}` : 'sin precio'}
             </span>
           </span>

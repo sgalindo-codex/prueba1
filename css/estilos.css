@@ -301,6 +301,12 @@ body.cargando .splash { opacity: 1; }
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 
+.producto__marca {
+  font-size: 11.5px; color: var(--texto-3);
+  margin-top: -2px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
 .producto__meta {
   display: flex; align-items: center; gap: 5px; flex-wrap: wrap;
   font-size: 12.5px; color: var(--texto-2);
@@ -548,6 +554,9 @@ body.cargando .splash { opacity: 1; }
 
 .compra-item__cuerpo { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
 .compra-item__nombre { font-size: 15px; font-weight: 600; }
+
+/* Marca y formato juntos: en el súper es lo que distingue un producto de otro. */
+.compra-item__marca { font-size: 11.5px; color: var(--texto-3); margin-top: -6px; }
 
 .compra-item__campos { display: flex; align-items: flex-end; gap: 9px; flex-wrap: wrap; }
 

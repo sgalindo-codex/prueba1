@@ -116,6 +116,13 @@ export default {
               <span class="producto__nombre">${esc(p.nombre)}</span>
               ${enLista ? '<span class="badge badge--lista">En la lista</span>' : ''}
             </div>
+            ${
+              p.marca || p.formato
+                ? `<span class="producto__marca">${esc(
+                    [p.marca, p.formato].filter(Boolean).join(' · ')
+                  )}</span>`
+                : ''
+            }
             <div class="producto__meta">
               <span class="producto__stock">${cantidad(p.stock)} ${esc(p.unidad)}</span>
               <span class="producto__sep">·</span>
@@ -160,11 +167,15 @@ export default {
         grupos.get(key).push(p);
       }
 
+      // Se respeta el orden en que están definidas las categorías: para
+      // momentos del día (desayuno, comida, merienda, cena) el alfabético
+      // no significa nada.
+      const ordenCategorias = store.categorias().map((c) => c.id);
       $lista.innerHTML = [...grupos.entries()]
         .sort(([a], [b]) => {
-          const na = store.categoria(a)?.nombre || 'zzz';
-          const nb = store.categoria(b)?.nombre || 'zzz';
-          return na.localeCompare(nb);
+          const ia = ordenCategorias.indexOf(a);
+          const ib = ordenCategorias.indexOf(b);
+          return (ia === -1 ? 999 : ia) - (ib === -1 ? 999 : ib);
         })
         .map(([catId, prods]) => {
           const cat = store.categoria(catId);

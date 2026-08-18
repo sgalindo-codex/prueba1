@@ -59,6 +59,13 @@ export default {
           </button>
           <div class="compra-item__cuerpo">
             <span class="compra-item__nombre">${esc(p.nombre)}</span>
+            ${
+              p.marca || p.formato
+                ? `<span class="compra-item__marca">${esc(
+                    [p.marca, p.formato].filter(Boolean).join(' · ')
+                  )}</span>`
+                : ''
+            }
             <div class="compra-item__campos">
               <label class="mini-campo">
                 <span>Cantidad</span>

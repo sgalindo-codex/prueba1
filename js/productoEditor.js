@@ -28,6 +28,19 @@ export function abrirEditorProducto(prod = null, { onGuardar, categoriaPorDefect
 
         <div class="campo-fila">
           <label class="campo">
+            <span class="campo__label">Marca</span>
+            <input class="campo__input" name="marca" type="text"
+                   placeholder="Hacendado" value="${esc(prod?.marca || '')}">
+          </label>
+          <label class="campo">
+            <span class="campo__label">Formato</span>
+            <input class="campo__input" name="formato" type="text"
+                   placeholder="Brick 1L" value="${esc(prod?.formato || '')}">
+          </label>
+        </div>
+
+        <div class="campo-fila">
+          <label class="campo">
             <span class="campo__label">Categoría</span>
             <select class="campo__input" name="categoriaId">
               <option value="">Sin categoría</option>
@@ -144,6 +157,8 @@ export function abrirEditorProducto(prod = null, { onGuardar, categoriaPorDefect
           nombre,
           categoriaId: datos.get('categoriaId') || null,
           unidad: datos.get('unidad') || 'ud',
+          marca: String(datos.get('marca') || '').trim() || null,
+          formato: String(datos.get('formato') || '').trim() || null,
           stock: Number(datos.get('stock')) || 0,
           stockMinimo: Number(datos.get('stockMinimo')) || 0,
         };

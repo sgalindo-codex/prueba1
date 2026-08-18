@@ -65,7 +65,19 @@ export default {
                 ? `<div class="resumen-final__fila"><span>Filas sin nombre (se ignoran)</span><strong>${analisis.filasIgnoradas}</strong></div>`
                 : ''
             }
+            <div class="resumen-final__fila"><span>Cabecera detectada</span><strong>fila ${
+              analisis.filaCabecera
+            }</strong></div>
           </div>
+
+          ${
+            analisis.stockAsumido
+              ? `<p class="campo__ayuda">
+                   El archivo no trae columna de stock. Los productos nuevos entran con
+                   2 unidades y mínimo 1; los que ya tengas conservan la cuenta actual.
+                 </p>`
+              : ''
+          }
 
           <div class="bloque">
             <h3 class="bloque__titulo">Primeros productos</h3>

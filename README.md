@@ -4,6 +4,10 @@ Inventario de comida y lista de la compra para casa. Aplicación web instalable
 en el iPhone: sabes qué te queda, qué hay que reponer, en qué supermercado sale
 más barato y cuánto te vas a gastar antes de salir de casa.
 
+Arranca con **52 productos repartidos en desayuno, comida, merienda y cena**,
+con su marca, formato y precio en Lidl, Mercadona o Aldi, importados de
+`datos/catalogo-casa-j.csv`.
+
 ## Qué hace
 
 | Sección | Para qué sirve |
@@ -48,31 +52,48 @@ Funciona sin conexión, así que sigue yendo dentro del súper aunque no haya co
 En **Ajustes → Importar catálogo**, subiendo un CSV (`Archivo → Guardar como → CSV`
 en Excel) o pegando las celdas directamente.
 
-Las columnas se detectan por su nombre, en cualquier orden:
+Las columnas se detectan por su nombre, en cualquier orden. **No hace falta que
+el nombre sea exacto**: basta con que empiece por uno de estos términos, así que
+`Precio aprox (EUR)` o `Cadena recomendada` se reconocen solos.
 
 | Columna | Alternativas aceptadas | Obligatoria |
 |---|---|---|
 | `Producto` | Nombre, Artículo, Descripción | Sí |
-| `Categoria` | Tipo, Sección, Familia | No |
-| `Unidad` | Medida, Formato | No |
+| `Categoria` | Sección, Familia, Momento, Tipo | No |
+| `Marca` | Fabricante | No |
+| `Formato` | Envase, Presentación, Tamaño | No |
+| `Unidad` | Medida, Uds | No |
 | `Stock` | Cantidad, Tengo, Existencias | No |
 | `Minimo` | Stock mínimo, Umbral | No |
-| `Supermercado` | Súper, Tienda | No |
+| `Supermercado` | Cadena, Súper, Tienda | No |
 | `Precio` | Coste, Importe, PVP | No |
+
+**La cabecera tampoco tiene que estar en la primera fila.** Se busca entre las
+primeras quince, saltando títulos y notas — que es justo como venía el Excel
+original de CASA J, con la tabla empezando en la fila 4.
 
 Un producto puede ocupar **varias filas, una por supermercado**: se funden en un
 único producto con varios precios.
 
 ```csv
-Producto;Categoria;Unidad;Stock;Minimo;Supermercado;Precio
-Leche entera 1L;Lácteos;ud;6;4;Mercadona;0,89
-Leche entera 1L;Lácteos;ud;6;4;Lidl;0,85
-Huevos docena;Lácteos;ud;2;1;Mercadona;2,35
+Producto;Categoria;Marca;Formato;Unidad;Stock;Minimo;Supermercado;Precio
+Leche Semi 1L;Desayuno;Hacendado;Brick 1L;ud;2;1;Mercadona;0,95
+Leche Semi 1L;Desayuno;Milbona;Brick 1L;ud;2;1;Lidl;0,89
+Café molido mezcla 250g;Desayuno;Bellarom;Paquete 250g;ud;2;1;Lidl;1,79
 ```
 
 Los supermercados y categorías que no existan se crean solos. Al importar puedes
 elegir entre **añadir** a lo que ya tienes (actualiza por nombre) o **reemplazar**
 el catálogo entero.
+
+### Si el archivo no trae columna de stock
+
+Los productos nuevos entran con **2 unidades y mínimo 1**. Así la despensa
+arranca en verde y el semáforo pasa por ámbar en cuanto gastas la primera
+unidad, en vez de marcar el catálogo entero como agotado el primer día.
+
+Al reimportar, los productos que ya existían **conservan la cuenta que llevabas**:
+un archivo sin stock nunca pisa lo que tú has contado a mano.
 
 ## Dónde viven los datos
 
@@ -108,10 +129,12 @@ manifest.json           Metadatos de instalación
 sw.js                   Service worker (funciona sin conexión)
 css/estilos.css         Todo el diseño
 icons/                  Iconos de la app
+datos/
+  catalogo-casa-j.csv   Catálogo inicial, reimportable desde Ajustes
 js/
   app.js                Arranque y navegación entre vistas
   store.js              Estado, reglas de negocio y persistencia
-  seed.js               Catálogo de ejemplo inicial
+  seed.js               Catálogo inicial (generado desde el Excel)
   ui.js                 Formato, toasts y hojas modales
   productoEditor.js     Alta y edición de productos
   importarCSV.js        Lectura y escritura de CSV

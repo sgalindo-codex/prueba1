@@ -1,111 +1,111 @@
 /**
- * Datos iniciales de CASA J.
+ * Catálogo inicial de CASA J.
  *
- * Es sólo un punto de partida para que la app no arranque vacía: en cuanto
- * importes tu Excel, este catálogo se sustituye por el tuyo.
+ * Generado a partir de "Lista_LIDL_MERCADONA_ALDI.xlsx": comparativa de
+ * productos por momento del día entre Lidl, Mercadona y Aldi, con la cadena
+ * recomendada de cada uno.
+ *
+ * Cada producto trae el precio de su cadena recomendada. Cuando anotes el
+ * precio del mismo producto en otro súper, el comparador y el botón
+ * "Súper más barato" empiezan a funcionar solos.
  */
 
-const s = (id) => `sup_${id}`;
-const c = (id) => `cat_${id}`;
-
-const SUPERMERCADOS = [
-  { id: s('mercadona'), nombre: 'Mercadona', color: '#00A65A' },
-  { id: s('lidl'), nombre: 'Lidl', color: '#0050AA' },
-  { id: s('carrefour'), nombre: 'Carrefour', color: '#004E9F' },
-  { id: s('dia'), nombre: 'Dia', color: '#D52B1E' },
-  { id: s('alcampo'), nombre: 'Alcampo', color: '#E30613' },
+const CATEGORIAS = [
+  { id: "cat_desayuno", nombre: "Desayuno", icono: "🥐" },
+  { id: "cat_comida", nombre: "Comida", icono: "🍽️" },
+  { id: "cat_merienda", nombre: "Merienda", icono: "🍎" },
+  { id: "cat_cena", nombre: "Cena", icono: "🌙" },
 ];
 
-const CATEGORIAS = [
-  { id: c('frescos'), nombre: 'Frutas y verduras', icono: '🥬' },
-  { id: c('carne'), nombre: 'Carne y pescado', icono: '🍗' },
-  { id: c('lacteos'), nombre: 'Lácteos y huevos', icono: '🥛' },
-  { id: c('despensa'), nombre: 'Despensa', icono: '🍝' },
-  { id: c('congelados'), nombre: 'Congelados', icono: '🧊' },
-  { id: c('bebidas'), nombre: 'Bebidas', icono: '🥤' },
-  { id: c('limpieza'), nombre: 'Limpieza', icono: '🧽' },
-  { id: c('higiene'), nombre: 'Higiene', icono: '🧴' },
+const SUPERMERCADOS = [
+  { id: "sup_lidl", nombre: "Lidl", color: "#0050AA" },
+  { id: "sup_mercadona", nombre: "Mercadona", color: "#00A65A" },
+  { id: "sup_aldi", nombre: "Aldi", color: "#009FE3" },
 ];
 
 /**
- * [nombre, categoría, unidad, stock, mínimo, { supermercado: precio }]
+ * [nombre, categoría, unidad, marca, formato, supermercado, precio]
  *
- * La despensa arranca casi llena a propósito: sólo una decena de productos
- * están bajo mínimo, para que la lista automática se entienda de un vistazo
- * en lugar de aparecer con cincuenta cosas.
+ * El stock arranca en 2 con mínimo 1: se asume un par de cada cosa para que la
+ * despensa no aparezca entera en rojo el primer día. Ajústalo desde Inventario
+ * y el semáforo se calibra solo.
  */
 const PRODUCTOS_BASE = [
-  ['Leche entera 1L', 'lacteos', 'ud', 6, 4, { mercadona: 0.89, lidl: 0.85, dia: 0.92 }],
-  ['Huevos docena', 'lacteos', 'ud', 2, 1, { mercadona: 2.35, carrefour: 2.49, lidl: 2.19 }],
-  ['Yogur natural pack 4', 'lacteos', 'pack', 3, 2, { mercadona: 1.45, dia: 1.55 }],
-  ['Queso rallado 200g', 'lacteos', 'ud', 0, 1, { mercadona: 1.75, lidl: 1.59 }],
-  ['Mantequilla 250g', 'lacteos', 'ud', 2, 1, { mercadona: 2.1, carrefour: 2.25 }],
+  ["Leche Semi 1L", "desayuno", "ud", "Hacendado", "Brick 1L", "mercadona", 0.95],
+  ["Café molido mezcla 250g", "desayuno", "ud", "Bellarom", "Paquete 250g", "lidl", 1.79],
+  ["Cacao soluble 800g-1kg", "desayuno", "ud", "Milsani", "Bote 800g", "aldi", 3.2],
+  ["Cereales corn flakes 500g", "desayuno", "ud", "Sondey / Harvest", "Caja 500g", "aldi", 0.85],
+  ["Pan de molde 460g", "desayuno", "ud", "Hacendado", "Bolsa 460g", "mercadona", 1.15],
+  ["Galletas María 800g", "desayuno", "ud", "Sondey", "Paquete 800g", "lidl", 1.2],
+  ["Mermelada de fresa 340g", "desayuno", "ud", "Fior di Frutta", "Tarro 340g", "aldi", 1.1],
+  ["Mantequilla 250g", "desayuno", "ud", "Milbona", "Pastilla 250g", "lidl", 1.75],
+  ["Zumo de naranja 1L", "desayuno", "ud", "Solevita", "Brick 1L", "lidl", 1.2],
+  ["Yogur natural pack 4", "desayuno", "pack", "Hacendado", "Pack 4 x 125g", "mercadona", 1.15],
+  ["Magdalenas 350g", "desayuno", "ud", "Sondey", "Bolsa 12 uds", "aldi", 1.3],
+  ["Aceite oliva virgen extra 1L", "desayuno", "ud", "Hacendado", "Botella 1L", "mercadona", 7.5],
+  ["Tomate triturado 400g", "desayuno", "ud", "Freshona", "Lata 400g", "lidl", 0.55],
+  ["Copos de avena 500g", "desayuno", "ud", "Harvest Morn", "Paquete 500g", "aldi", 0.85],
 
-  ['Pechuga de pollo', 'carne', 'kg', 1.5, 1, { mercadona: 6.5, carrefour: 6.95, alcampo: 6.2 }],
-  ['Carne picada mixta', 'carne', 'kg', 0, 0.5, { mercadona: 7.2, lidl: 6.9 }],
-  ['Salmón fresco', 'carne', 'kg', 1, 0.5, { carrefour: 12.9, alcampo: 11.5 }],
-  ['Jamón serrano lonchas', 'carne', 'ud', 3, 1, { mercadona: 2.85, dia: 2.99 }],
+  ["Arroz redondo 1kg", "comida", "ud", "Hacendado", "Paquete 1kg", "mercadona", 1.05],
+  ["Espaguetis 500g", "comida", "ud", "Combino", "Paquete 500g", "lidl", 0.75],
+  ["Tomate frito 780g", "comida", "ud", "Hacendado", "Bote 780g", "mercadona", 1.2],
+  ["Atún claro aceite girasol pack 3", "comida", "pack", "Hacendado", "3 x 80g", "mercadona", 2.1],
+  ["Garbanzos cocidos bote 570g", "comida", "ud", "El Cocinero / Delikato", "Bote 570g", "aldi", 0.65],
+  ["Lentejas cocidas bote 570g", "comida", "ud", "Freshona", "Bote 570g", "lidl", 0.65],
+  ["Pechuga de pollo bandeja", "comida", "kg", "Hacendado", "Bandeja (EUR/kg)", "mercadona", 5.5],
+  ["Carne picada mixta 500g", "comida", "ud", null, "Bandeja 500g", "lidl", 3.2],
+  ["Pizza refrigerada", "comida", "ud", "Hacendado", "Unidad ~400g", "mercadona", 2.5],
+  ["Patatas 5kg", "comida", "ud", null, "Malla 5kg", "aldi", 3.5],
+  ["Menestra verduras congeladas 1kg", "comida", "ud", "Freshona", "Bolsa 1kg", "lidl", 1.6],
+  ["Caldo de pollo 1L", "comida", "ud", "Cucina", "Brick 1L", "aldi", 1.05],
+  ["Sal fina 1kg", "comida", "ud", null, "Paquete 1kg", "lidl", 0.35],
+  ["Macarrones 500g", "comida", "ud", "Cucina", "Paquete 500g", "aldi", 0.75],
 
-  ['Tomates', 'frescos', 'kg', 1.5, 1, { mercadona: 1.99, alcampo: 1.75, dia: 2.1 }],
-  ['Cebollas', 'frescos', 'kg', 2, 1, { mercadona: 1.35, lidl: 1.25 }],
-  ['Patatas', 'frescos', 'kg', 4, 2, { mercadona: 1.29, alcampo: 1.15 }],
-  ['Plátanos', 'frescos', 'kg', 0.5, 1, { mercadona: 1.85, carrefour: 1.95 }],
-  ['Manzanas', 'frescos', 'kg', 2, 1, { mercadona: 2.15, dia: 2.29 }],
-  ['Lechuga', 'frescos', 'ud', 0, 1, { mercadona: 1.1, lidl: 0.99 }],
-  ['Ajos', 'frescos', 'ud', 3, 1, { mercadona: 0.95 }],
+  ["Plátanos", "merienda", "kg", null, "EUR/kg", "aldi", 1.45],
+  ["Manzanas", "merienda", "kg", null, "EUR/kg", "aldi", 1.6],
+  ["Mezcla frutos secos 200g", "merienda", "ud", "Hacendado", "Bolsa 200g", "mercadona", 2.2],
+  ["Barritas de cereales", "merienda", "ud", "Sondey", "Caja 6 uds", "aldi", 1.3],
+  ["Chocolate con leche tableta", "merienda", "ud", "Hacendado", "Tableta 125g", "mercadona", 0.95],
+  ["Galletas con chocolate", "merienda", "ud", "Sondey", "Paquete", "lidl", 1.2],
+  ["Batido de chocolate pack", "merienda", "pack", "Hacendado", "Pack 3 x 200ml", "mercadona", 1.3],
+  ["Tortitas de maíz", "merienda", "ud", null, "Paquete", "lidl", 0.85],
+  ["Queso en lonchas 200g", "merienda", "ud", "El Mercado", "Sobre 200g", "aldi", 1.4],
+  ["Yogur bebible pack", "merienda", "pack", "Milbona", "Pack 4", "lidl", 1.2],
+  ["Palitos / regañas", "merienda", "ud", "Hacendado", "Bolsa", "mercadona", 1.1],
+  ["Pasas / fruta desecada 200g", "merienda", "ud", null, "Bolsa 200g", "aldi", 1.3],
 
-  ['Pasta espaguetis 500g', 'despensa', 'ud', 4, 2, { mercadona: 0.89, lidl: 0.79, dia: 0.95 }],
-  ['Arroz redondo 1kg', 'despensa', 'ud', 3, 1, { mercadona: 1.25, carrefour: 1.39 }],
-  ['Aceite de oliva virgen extra 1L', 'despensa', 'ud', 2, 1, { mercadona: 8.5, alcampo: 8.15, lidl: 8.35 }],
-  ['Tomate frito 400g', 'despensa', 'ud', 5, 3, { mercadona: 0.75, dia: 0.82 }],
-  ['Atún en aceite pack 3', 'despensa', 'pack', 4, 2, { mercadona: 2.4, lidl: 2.25 }],
-  ['Pan de molde', 'despensa', 'ud', 1, 1, { mercadona: 1.35, carrefour: 1.45 }],
-  ['Café molido 250g', 'despensa', 'ud', 2, 1, { mercadona: 2.95, dia: 3.15 }],
-  ['Azúcar 1kg', 'despensa', 'ud', 2, 1, { mercadona: 1.15, alcampo: 1.05 }],
-  ['Sal 1kg', 'despensa', 'ud', 2, 1, { mercadona: 0.45 }],
-  ['Harina 1kg', 'despensa', 'ud', 2, 1, { mercadona: 0.65, lidl: 0.59 }],
-  ['Legumbres cocidas bote', 'despensa', 'ud', 5, 2, { mercadona: 0.85, dia: 0.89 }],
-  ['Cereales desayuno', 'despensa', 'ud', 0, 1, { mercadona: 2.65, carrefour: 2.8 }],
-  ['Galletas', 'despensa', 'ud', 3, 1, { mercadona: 1.55, lidl: 1.35 }],
-
-  ['Guisantes congelados 1kg', 'congelados', 'ud', 2, 1, { mercadona: 1.85, lidl: 1.69 }],
-  ['Pizza congelada', 'congelados', 'ud', 3, 1, { mercadona: 2.5, carrefour: 2.75 }],
-  ['Verdura para wok congelada', 'congelados', 'ud', 0, 1, { lidl: 1.95, alcampo: 2.05 }],
-
-  ['Agua mineral pack 6', 'bebidas', 'pack', 4, 2, { mercadona: 1.8, dia: 1.95, alcampo: 1.65 }],
-  ['Refresco cola 2L', 'bebidas', 'ud', 1, 2, { mercadona: 1.45, carrefour: 1.55 }],
-  ['Zumo naranja 1L', 'bebidas', 'ud', 3, 1, { mercadona: 1.25, lidl: 1.15 }],
-  ['Cerveza pack 6', 'bebidas', 'pack', 2, 1, { mercadona: 2.85, dia: 3.05 }],
-
-  ['Detergente lavadora', 'limpieza', 'ud', 2, 1, { mercadona: 4.5, alcampo: 4.25, carrefour: 4.75 }],
-  ['Suavizante', 'limpieza', 'ud', 0, 1, { mercadona: 2.35, dia: 2.5 }],
-  ['Lavavajillas a mano', 'limpieza', 'ud', 3, 1, { mercadona: 1.65, lidl: 1.45 }],
-  ['Pastillas lavavajillas', 'limpieza', 'ud', 2, 1, { mercadona: 5.5, carrefour: 5.95 }],
-  ['Papel de cocina', 'limpieza', 'pack', 1, 2, { mercadona: 2.15, alcampo: 1.99 }],
-  ['Bolsas de basura', 'limpieza', 'ud', 3, 1, { mercadona: 1.35, dia: 1.45 }],
-  ['Limpiacristales', 'limpieza', 'ud', 2, 1, { mercadona: 1.55 }],
-  ['Lejía', 'limpieza', 'ud', 2, 1, { mercadona: 1.05, lidl: 0.95 }],
-
-  ['Papel higiénico pack 12', 'higiene', 'pack', 1, 2, { mercadona: 4.95, lidl: 4.5, alcampo: 4.75 }],
-  ['Gel de ducha', 'higiene', 'ud', 3, 1, { mercadona: 1.85, dia: 1.99 }],
-  ['Champú', 'higiene', 'ud', 2, 1, { mercadona: 2.25, carrefour: 2.45 }],
-  ['Pasta de dientes', 'higiene', 'ud', 0, 1, { mercadona: 1.75, lidl: 1.55 }],
-  ['Desodorante', 'higiene', 'ud', 2, 1, { mercadona: 2.15 }],
+  ["Huevos M docena", "cena", "ud", null, "Docena", "lidl", 2.2],
+  ["Jamón cocido lonchas", "cena", "ud", "El Mercado", "Sobre 200g", "aldi", 1.6],
+  ["Pavo lonchas", "cena", "ud", null, "Sobre 200g", "lidl", 1.55],
+  ["Ensalada bolsa 4 estaciones", "cena", "ud", "Hacendado", "Bolsa", "mercadona", 1.1],
+  ["Crema de verduras 1L", "cena", "ud", "Hacendado", "Brick 1L", "mercadona", 1.6],
+  ["Merluza filetes congelada", "cena", "ud", "Almare", "Caja ~400g", "aldi", 4.5],
+  ["Hummus", "cena", "ud", "Vemondo", "Tarrina 200g", "lidl", 1.3],
+  ["Tortilla de patata refrigerada", "cena", "ud", "Hacendado", "Unidad", "mercadona", 2.4],
+  ["Queso semicurado cuña", "cena", "ud", "El Mercado", "Cuña ~250g", "aldi", 3.2],
+  ["Palitos de mar (surimi)", "cena", "ud", "Ocean Sea", "Paquete", "lidl", 1.3],
+  ["Pan chapata / rústico", "cena", "ud", "Baker's", "Unidad", "lidl", 0.85],
+  ["Sopa juliana congelada 1kg", "cena", "ud", null, "Bolsa 1kg", "aldi", 1.5],
 ];
+
+const STOCK_INICIAL = 2;
+const MINIMO_INICIAL = 1;
 
 const hoy = new Date().toISOString().slice(0, 10);
 
-const PRODUCTOS = PRODUCTOS_BASE.map(([nombre, cat, unidad, stock, minimo, precios], i) => ({
-  id: `prod_seed${i}`,
-  nombre,
-  categoriaId: c(cat),
-  unidad,
-  stock,
-  stockMinimo: minimo,
-  precios: Object.fromEntries(
-    Object.entries(precios).map(([sup, precio]) => [s(sup), [{ precio, fecha: hoy }]])
-  ),
-}));
+const PRODUCTOS = PRODUCTOS_BASE.map(
+  ([nombre, cat, unidad, marca, formato, sup, precio], i) => ({
+    id: `prod_seed${i}`,
+    nombre,
+    categoriaId: `cat_${cat}`,
+    unidad,
+    marca,
+    formato,
+    stock: STOCK_INICIAL,
+    stockMinimo: MINIMO_INICIAL,
+    precios: { [`sup_${sup}`]: [{ precio, fecha: hoy }] },
+  })
+);
 
 export const SEED = {
   version: 1,

@@ -1,0 +1,53 @@
+Producto;Categoria;Marca;Formato;Unidad;Stock;Minimo;Supermercado;Precio
+Leche Semi 1L;Desayuno;Hacendado;Brick 1L;ud;2;1;Mercadona;0,95
+Café molido mezcla 250g;Desayuno;Bellarom;Paquete 250g;ud;2;1;Lidl;1,79
+Cacao soluble 800g-1kg;Desayuno;Milsani;Bote 800g;ud;2;1;Aldi;3,20
+Cereales corn flakes 500g;Desayuno;Sondey / Harvest;Caja 500g;ud;2;1;Aldi;0,85
+Pan de molde 460g;Desayuno;Hacendado;Bolsa 460g;ud;2;1;Mercadona;1,15
+Galletas María 800g;Desayuno;Sondey;Paquete 800g;ud;2;1;Lidl;1,20
+Mermelada de fresa 340g;Desayuno;Fior di Frutta;Tarro 340g;ud;2;1;Aldi;1,10
+Mantequilla 250g;Desayuno;Milbona;Pastilla 250g;ud;2;1;Lidl;1,75
+Zumo de naranja 1L;Desayuno;Solevita;Brick 1L;ud;2;1;Lidl;1,20
+Yogur natural pack 4;Desayuno;Hacendado;Pack 4 x 125g;pack;2;1;Mercadona;1,15
+Magdalenas 350g;Desayuno;Sondey;Bolsa 12 uds;ud;2;1;Aldi;1,30
+Aceite oliva virgen extra 1L;Desayuno;Hacendado;Botella 1L;ud;2;1;Mercadona;7,50
+Tomate triturado 400g;Desayuno;Freshona;Lata 400g;ud;2;1;Lidl;0,55
+Copos de avena 500g;Desayuno;Harvest Morn;Paquete 500g;ud;2;1;Aldi;0,85
+Arroz redondo 1kg;Comida;Hacendado;Paquete 1kg;ud;2;1;Mercadona;1,05
+Espaguetis 500g;Comida;Combino;Paquete 500g;ud;2;1;Lidl;0,75
+Tomate frito 780g;Comida;Hacendado;Bote 780g;ud;2;1;Mercadona;1,20
+Atún claro aceite girasol pack 3;Comida;Hacendado;3 x 80g;pack;2;1;Mercadona;2,10
+Garbanzos cocidos bote 570g;Comida;El Cocinero / Delikato;Bote 570g;ud;2;1;Aldi;0,65
+Lentejas cocidas bote 570g;Comida;Freshona;Bote 570g;ud;2;1;Lidl;0,65
+Pechuga de pollo bandeja;Comida;Hacendado;Bandeja (EUR/kg);kg;2;1;Mercadona;5,50
+Carne picada mixta 500g;Comida;;Bandeja 500g;ud;2;1;Lidl;3,20
+Pizza refrigerada;Comida;Hacendado;Unidad ~400g;ud;2;1;Mercadona;2,50
+Patatas 5kg;Comida;;Malla 5kg;ud;2;1;Aldi;3,50
+Menestra verduras congeladas 1kg;Comida;Freshona;Bolsa 1kg;ud;2;1;Lidl;1,60
+Caldo de pollo 1L;Comida;Cucina;Brick 1L;ud;2;1;Aldi;1,05
+Sal fina 1kg;Comida;;Paquete 1kg;ud;2;1;Lidl;0,35
+Macarrones 500g;Comida;Cucina;Paquete 500g;ud;2;1;Aldi;0,75
+Plátanos;Merienda;;EUR/kg;kg;2;1;Aldi;1,45
+Manzanas;Merienda;;EUR/kg;kg;2;1;Aldi;1,60
+Mezcla frutos secos 200g;Merienda;Hacendado;Bolsa 200g;ud;2;1;Mercadona;2,20
+Barritas de cereales;Merienda;Sondey;Caja 6 uds;ud;2;1;Aldi;1,30
+Chocolate con leche tableta;Merienda;Hacendado;Tableta 125g;ud;2;1;Mercadona;0,95
+Galletas con chocolate;Merienda;Sondey;Paquete;ud;2;1;Lidl;1,20
+Batido de chocolate pack;Merienda;Hacendado;Pack 3 x 200ml;pack;2;1;Mercadona;1,30
+Tortitas de maíz;Merienda;;Paquete;ud;2;1;Lidl;0,85
+Queso en lonchas 200g;Merienda;El Mercado;Sobre 200g;ud;2;1;Aldi;1,40
+Yogur bebible pack;Merienda;Milbona;Pack 4;pack;2;1;Lidl;1,20
+Palitos / regañas;Merienda;Hacendado;Bolsa;ud;2;1;Mercadona;1,10
+Pasas / fruta desecada 200g;Merienda;;Bolsa 200g;ud;2;1;Aldi;1,30
+Huevos M docena;Cena;;Docena;ud;2;1;Lidl;2,20
+Jamón cocido lonchas;Cena;El Mercado;Sobre 200g;ud;2;1;Aldi;1,60
+Pavo lonchas;Cena;;Sobre 200g;ud;2;1;Lidl;1,55
+Ensalada bolsa 4 estaciones;Cena;Hacendado;Bolsa;ud;2;1;Mercadona;1,10
+Crema de verduras 1L;Cena;Hacendado;Brick 1L;ud;2;1;Mercadona;1,60
+Merluza filetes congelada;Cena;Almare;Caja ~400g;ud;2;1;Aldi;4,50
+Hummus;Cena;Vemondo;Tarrina 200g;ud;2;1;Lidl;1,30
+Tortilla de patata refrigerada;Cena;Hacendado;Unidad;ud;2;1;Mercadona;2,40
+Queso semicurado cuña;Cena;El Mercado;Cuna ~250g;ud;2;1;Aldi;3,20
+Palitos de mar (surimi);Cena;Ocean Sea;Paquete;ud;2;1;Lidl;1,30
+Pan chapata / rústico;Cena;Baker's;Unidad;ud;2;1;Lidl;0,85
+Sopa juliana congelada 1kg;Cena;;Bolsa 1kg;ud;2;1;Aldi;1,50

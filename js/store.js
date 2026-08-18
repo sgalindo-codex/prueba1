@@ -193,7 +193,16 @@ export function estadoStock(prod) {
   return 'ok';
 }
 
-export function addProducto({ nombre, categoriaId, unidad, stock, stockMinimo, precios }) {
+export function addProducto({
+  nombre,
+  categoriaId,
+  unidad,
+  stock,
+  stockMinimo,
+  precios,
+  marca,
+  formato,
+}) {
   const p = {
     id: uid('prod'),
     nombre: nombre.trim(),
@@ -201,6 +210,8 @@ export function addProducto({ nombre, categoriaId, unidad, stock, stockMinimo, p
     unidad: unidad || 'ud',
     stock: Number(stock) || 0,
     stockMinimo: Number(stockMinimo) || 0,
+    marca: marca?.trim() || null,
+    formato: formato?.trim() || null,
     precios: {},
   };
   // precios llega como { supermercadoId: precio }
